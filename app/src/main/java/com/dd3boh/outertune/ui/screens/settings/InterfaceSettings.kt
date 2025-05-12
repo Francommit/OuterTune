@@ -149,16 +149,15 @@ fun InterfaceSettings(
         mutableTabs.apply {
             clear()
 
-            val enabled = Screens.getScreens(enabledTabs)
+            // Only include the Playlists tab
+            val enabled = Screens.getScreens(enabledTabs).filter { it.route == Screens.Playlists.route }
             addAll(enabled.map { it to true })
-            addAll(
-                Screens.getAllScreens().filterNot { it in enabled }.map { it to false }
-            )
         }
-    }
 
-    LaunchedEffect(showTabArrangement, enabledTabs) {
-        updateTabs()
+        // Ensure the default open tab is set to Playlists
+        if (defaultOpenTab != Screens.Playlists.route) {
+            onDefaultOpenTabChange(Screens.Playlists.route)
+        }
     }
 
 
