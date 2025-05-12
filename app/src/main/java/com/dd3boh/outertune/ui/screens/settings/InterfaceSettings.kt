@@ -149,7 +149,7 @@ fun InterfaceSettings(
         mutableTabs.apply {
             clear()
 
-            // Only include the Playlists tab
+            // Only include the Playlists tab!
             val enabled = Screens.getScreens(enabledTabs).filter { it.route == Screens.Playlists.route }
             addAll(enabled.map { it to true })
         }
